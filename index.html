@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu Agente Personal de IA — Capacidades y Beneficios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --bg-soft: #111827;
+      --card: rgba(255, 255, 255, 0.04);
+      --card-hover: rgba(255, 255, 255, 0.07);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --accent: #6366f1;
+      --accent-2: #22d3ee;
+      --success: #34d399;
+      --radius: 16px;
+      --max-w: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.16), transparent 35%),
+                  radial-gradient(circle at 85% 20%, rgba(34, 211, 238, 0.12), transparent 35%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(11, 15, 25, 0.78);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 14px rgba(99, 102, 241, 0.8);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #4f46e5);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: var(--card);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-ghost:hover {
+      background: var(--card-hover);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 64px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(99, 102, 241, 0.14);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      color: #c7d2fe;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 4.5vw, 3.3rem);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #a5b4fc, var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 540px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .preview-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .status-pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+
+    .chat-bubble {
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    .chat-user {
+      background: rgba(99, 102, 241, 0.18);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      margin-left: 24px;
+    }
+
+    .chat-agent {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      margin-right: 12px;
+    }
+
+    .chat-agent ul {
+      margin-top: 8px;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 64px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 44px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    /* Capabilities Grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: var(--card-hover);
+      border-color: rgba(165, 180, 252, 0.35);
+    }
+
+    .icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.3rem;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* Steps */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .step-num {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* Interactive Examples */
+    .tabs-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .tabs-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .tab-btn {
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .tab-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .prompt-box {
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .prompt-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-2);
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid-3,
+      .steps,
+      .tab-content {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding-top: 48px;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <span class="brand-dot"></span>
+        <span>Mi Agente IA</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#capacidades">Capacidades</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#ejemplos">Ejemplos</a>
+      </nav>
+      <a href="#ejemplos" class="btn btn-primary">Ver en acción</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div>
+        <span class="badge">✨ Guía rápida e intuitiva</span>
+        <h1>Arma tu propio <span class="gradient-text">agente personal de IA</span></h1>
+        <p>
+          Un agente personal no es solo un chat: es un asistente capaz de recordar tu contexto,
+          conectarse a tus herramientas y ejecutar tareas reales por ti de forma segura.
+        </p>
+        <div class="hero-actions">
+          <a href="#capacidades" class="btn btn-primary">Explorar capacidades</a>
+          <a href="#como-funciona" class="btn btn-ghost">¿Cómo empezar?</a>
+        </div>
+      </div>
+
+      <div class="preview-card" aria-label="Ejemplo de interacción con agente">
+        <div class="preview-header">
+          <span>Asistente Personal v1.0</span>
+          <span class="status-pill">Activo</span>
+        </div>
+        <div class="chat-bubble chat-user">
+          "Organiza mi semana: revisa mis pendientes, resume los correos urgentes y bloquea 2 horas para estudiar."
+        </div>
+        <div class="chat-bubble chat-agent">
+          <strong>Listo. Esto es lo que hice por ti:</strong>
+          <ul>
+            <li>Resumí 4 correos prioritarios de clientes.</li>
+            <li>Creé un bloque de estudio el miércoles de 18:00 a 20:00.</li>
+            <li>Actualicé tu lista de tareas en orden de urgencia.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="capacidades" class="container">
+      <div class="section-head">
+        <h2>¿Qué puede hacer un agente personal?</h2>
+        <p>Combina inteligencia artificial con tus propias reglas y herramientas para multiplicar tu tiempo.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <div class="icon-box">⚡</div>
+          <h3>Automatiza tareas repetitivas</h3>
+          <p>Redacta respuestas, clasifica información, genera reportes diarios y ejecuta rutinas sin intervención manual.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon-box">🧠</div>
+          <h3>Memoria y contexto propio</h3>
+          <p>Recuerda tus preferencias, tono de comunicación, proyectos activos y notas para darte respuestas exactas.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon-box">🔌</div>
+          <h3>Conexión con tus apps</h3>
+          <p>Intégralo con calendario, correo, Notion, archivos locales o mensajería para que actúe donde tú trabajas.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon-box">📚</div>
+          <h3>Investigación y síntesis</h3>
+          <p>Lee documentos largos, extrae puntos clave, compara opciones y te entrega resúmenes listos para decidir.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon-box">🛡️</div>
+          <h3>Privacidad y control total</h3>
+          <p>Tú defines qué datos puede ver, qué acciones requieren tu aprobación y qué límites nunca debe cruzar.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon-box">🌙</div>
+          <h3>Disponible 24/7</h3>
+          <p>Puede trabajar bajo demanda cuando le escribes o ejecutarse en horarios programados mientras descansas.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="container">
+      <div class="section-head">
+        <h2>Armarlo es más simple de lo que parece</h2>
+        <p>Solo necesitas tres piezas básicas para tener tu primer agente funcionando.</p>
+      </div>
+
+      <div class="steps">
+        <div class="card">
+          <span class="step-num">Paso 01</span>
+          <h3>Define su rol y reglas</h3>
+          <p>Indícale quién es, cómo debe hablarte y qué objetivos debe priorizar en tu día a día.</p>
+        </div>
+        <div class="card">
+          <span class="step-num">Paso 02</span>
+          <h3>Dale herramientas</h3>
+          <p>Conecta acceso a tus notas, calendario o APIs simples para que pueda leer y actuar, no solo conversar.</p>
+        </div>
+        <div class="card">
+          <span class="step-num">Paso 03</span>
+          <h3>Delega y supervisa</h3>
+          <p>Empieza con tareas pequeñas, revisa sus resultados y dale más autonomía conforme ganes confianza.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ejemplos" class="container">
+      <div class="section-head">
+        <h2>Ejemplos prácticos de uso</h2>
+        <p>Selecciona un área para ver cómo un agente personal resuelve peticiones reales.</p>
+      </div>
+
+      <div class="tabs-wrap">
+        <div class="tabs-bar" role="tablist">
+          <button class="tab-btn active" data-tab="prod" type="button">Productividad</button>
+          <button class="tab-btn" data-tab="aprendizaje" type="button">Aprendizaje</button>
+          <button class="tab-btn" data-tab="finanzas" type="button">Hogar y Finanzas</button>
+        </div>
+
+        <div class="tab-content" id="tab-display">
+          <div class="prompt-box">
+            <span class="prompt-label">Lo que tú le pides</span>
+            <p id="example-prompt">"Cada mañana a las 8:00 envíame un resumen con mis 3 prioridades del día y las reuniones que tengo hoy."</p>
+          </div>
+          <div class="prompt-box">
+            <span class="prompt-label">Lo que hace tu agente</span>
+            <p id="example-result">Consulta tu calendario y lista de tareas, filtra lo urgente, redacta un brief claro de 5 líneas y te lo envía a tu chat favorito.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Hecho como guía introductoria estática sobre agentes personales de IA.</p>
+    </div>
+  </footer>
+
+  <script>
+    const examples = {
+      prod: {
+        prompt: '"Cada mañana a las 8:00 envíame un resumen con mis 3 prioridades del día y las reuniones que tengo hoy."',
+        result: 'Consulta tu calendario y lista de tareas, filtra lo urgente, redacta un brief claro de 5 líneas y te lo envía a tu chat favorito.'
+      },
+      aprendizaje: {
+        prompt: '"Guarda este artículo sobre diseño de sistemas, resúmelo en 5 puntos y créame 3 preguntas de repaso."',
+        result: 'Extrae las ideas principales, las archiva en tu base de notas etiquetadas y programa un recordatorio para repasarlas el viernes.'
+      },
+      finanzas: {
+        prompt: '"Registra este gasto de $450 en supermercado y avísame cuánto me queda del presupuesto mensual."',
+        result: 'Anota el movimiento en tu hoja de control, recalcula la categoría de alimentos y te muestra el saldo disponible al instante.'
+      }
+    };
+
+    const buttons = document.querySelectorAll('.tab-btn');
+    const promptEl = document.getElementById('example-prompt');
+    const resultEl = document.getElementById('example-result');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const key = btn.getAttribute('data-tab');
+        promptEl.textContent = examples[key].prompt;
+        resultEl.textContent = examples[key].result;
+      });
+    });
+  </script>
+</body>
+</html>
